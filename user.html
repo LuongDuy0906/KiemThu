@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Người Dùng</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <h2>👤 Quản Lý Người Dùng</h2>
+
+    <div class="top-bar" style="display: flex; justify-content: space-between;">
+        <button class="btn btn-primary" onclick="openAddPopup()">+ Thêm Người Dùng</button>
+        <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input id="searchInput" class="search-input" placeholder="Tìm username / họ tên..." oninput="applySearch()">
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên đăng nhập</th>
+                <th>Mật khẩu</th>
+                <th>Họ và tên</th>
+                <th>Số điện thoại</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody"></tbody>
+    </table>
+
+    <div class="pagination" id="pagination"></div>
+
+    <!-- ================= POPUP ADD ================= -->
+    <div id="popupAdd" class="popup">
+        <div class="popup-content">
+            <h3>Thêm Người Dùng</h3>
+
+            <label>Tên đăng nhập</label>
+            <input id="add_username" class="input">
+
+            <label>Mật khẩu</label>
+            <input id="add_password" class="input" type="password">
+
+            <label>Họ và tên</label>
+            <input id="add_name" class="input">
+
+            <label>Số điện thoại</label>
+            <input id="add_phone" class="input">
+
+            <div class="popup-footer">
+                <button class="btn btn-primary" onclick="addUser()">Lưu</button>
+                <button class="btn btn-secondary" onclick="closeAddPopup()">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= POPUP EDIT ================= -->
+    <div id="popupEdit" class="popup">
+        <div class="popup-content">
+            <h3>Cập nhật Người Dùng</h3>
+
+            <label>Tên đăng nhập</label>
+            <input id="edit_username" class="input">
+
+            <label>Mật khẩu</label>
+            <input id="edit_password" class="input" type="password">
+
+            <label>Họ và tên</label>
+            <input id="edit_name" class="input">
+
+            <label>Số điện thoại</label>
+            <input id="edit_phone" class="input">
+
+            <div class="popup-footer">
+                <button class="btn btn-primary" onclick="updateUser()">Cập nhật</button>
+                <button class="btn btn-secondary" onclick="closeEditPopup()">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/user.js"></script>
+
+    </body>
+</html>

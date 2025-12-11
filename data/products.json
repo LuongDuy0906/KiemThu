@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Áo Thun Nam",
+    "manufactureDate": "2024-10-10",
+    "category": "Thời trang",
+    "origin": "Việt Nam",
+    "price": 150000,
+    "description": "Áo thun cotton 100% thoáng mát.",
+    "supplierId": 1
+  },
+  {
+    "id": 2,
+    "name": "Giày Thể Thao",
+    "manufactureDate": "2024-08-20",
+    "category": "Giày Dép",
+    "origin": "Indonesia",
+    "price": 450000,
+    "description": "Giày chạy bộ, đế cao su chống trượt.",
+    "supplierId": 2
+  }
+]

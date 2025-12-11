@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Sản Phẩm</title>
+
+    <!-- CSS dùng chung -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+    <h2>📦 Quản Lý Sản Phẩm</h2>
+
+    <button class="btn btn-primary" onclick="openPopupAdd()">+ Thêm Sản Phẩm</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên SP</th>
+                <th>NSX</th>
+                <th>Danh mục</th>
+                <th>Xuất xứ</th>
+                <th>Giá bán</th>
+                <th>Mô tả</th>
+                <th>NCC</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="pagination"></div>
+
+    <!-- Popup Add -->
+    <div class="popup" id="popupAdd">
+      <div class="popup-content">
+          <h3>Thêm Sản Phẩm</h3>
+
+          <input type="text" id="add_name" placeholder="Tên sản phẩm">
+          <input type="date" id="add_manufactureDate" placeholder="dd/mm/yyyy">
+          <input type="text" id="add_category" placeholder="Danh mục">
+          <input type="text" id="add_origin" placeholder="Xuất xứ">
+          <input type="number" id="add_price" placeholder="Giá bán">
+          <textarea id="add_description" placeholder="Mô tả chi tiết"></textarea>
+
+          <select id="add_supplier_id">
+              <option value="">-- Chọn nhà cung cấp --</option>
+              <option value="1">Nhà cung cấp 1</option>
+              <option value="2">Nhà cung cấp 2</option>
+          </select>
+
+          <div class="popup-actions">
+              <button class="btn btn-primary" onclick="addSubmit(event)">Lưu</button>
+              <button class="btn btn-secondary" onclick="closePopupAdd()">Đóng</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Popup Edit -->
+    <div class="popup" id="popupEdit">
+        <div class="popup-content">
+            <h3>Cập Nhật Sản Phẩm</h3>
+
+            <input type="text" id="edit_name">
+            <input type="date" id="edit_manufactureDate">
+            <input type="text" id="edit_category">
+            <input type="text" id="edit_origin">
+            <input type="number" id="edit_price">
+            <textarea id="edit_description"></textarea>
+
+            <select id="edit_supplier_id">
+                <option value="">-- Chọn nhà cung cấp --</option>
+                <option value="1">Nhà cung cấp 1</option>
+                <option value="2">Nhà cung cấp 2</option>
+            </select>
+
+            <button class="btn btn-primary" onclick="editSubmit(event)">Cập nhật</button>
+            <button class="btn btn-secondary" onclick="closePopupEdit()">Đóng</button>
+        </div>
+    </div>
+
+<script src="./assets/js/product.js"></script>
+
+</body>
+</html>

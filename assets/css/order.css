@@ -1,0 +1,31 @@
+/* Popup lớn đặc biệt cho Order */
+.big-popup {
+    width: 900px !important;
+    max-height: 90vh !important;
+}
+
+.row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+.col { flex: 1; }
+.col.small { flex: 0.5; }
+.col.full { flex: 100%; }
+
+.table-mini {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+.table-mini th {
+    background: var(--primary);
+    color: white;
+    padding: 10px;
+}
+.table-mini td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.right { text-align: right; }

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Quản Lý Mã Giảm Giá</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS CHUNG -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/discounts.css">
+</head>
+
+<body>
+
+<h2>🎟️ Quản lý Mã Giảm Giá (Offline)</h2>
+
+<div class="top-bar" style="display:flex;justify-content:space-between;">
+    <button class="btn btn-primary" onclick="openAdd()">+ Thêm Mã Giảm Giá</button>
+
+    <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input id="searchInput" class="search-input" placeholder="Tìm mã giảm giá..." oninput="applySearch()">
+    </div>
+</div>
+
+<!-- TABLE -->
+<table id="couponTable">
+    <thead>
+        <tr>
+            <th>Poster</th>
+            <th>Tên chương trình</th>
+            <th>Mã</th>
+            <th>Loại</th>
+            <th>Lượng giảm</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+            <th>Số lượng</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div id="pagination" class="pagination"></div>
+
+<!-- POPUP ADD/EDIT -->
+<div class="popup" id="popupCoupon">
+    <div class="popup-content big-popup">
+
+        <h3 id="popupTitle">Thêm Mã Giảm Giá</h3>
+
+        <div class="row">
+            <div class="col">
+                <label>Tên chương trình</label>
+                <input id="c_name" class="input">
+            </div>
+            <div class="col">
+                <label>Loại</label>
+                <select id="c_type" class="input">
+                    <option value="percent">Giảm %</option>
+                    <option value="fixed">Giảm tiền</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Mã khuyến mãi</label>
+                <input id="c_code" class="input">
+            </div>
+            <div class="col">
+                <label>Lượng giảm</label>
+                <input id="c_amount" type="number" class="input">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Ngày bắt đầu</label>
+                <input id="c_start" type="date" class="input">
+            </div>
+            <div class="col">
+                <label>Ngày kết thúc</label>
+                <input id="c_end" type="date" class="input">
+            </div>
+            <div class="col">
+                <label>Số lượng</label>
+                <input id="c_qty" type="number" class="input">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Poster (URL)</label>
+                <input id="c_poster" class="input">
+            </div>
+        </div>
+
+        <div class="popup-footer">
+            <button class="btn btn-primary" onclick="saveCoupon()">Lưu</button>
+            <button class="btn btn-secondary" onclick="closePopup()">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<!-- POPUP VIEW -->
+<div class="popup" id="popupView">
+    <div class="popup-content big-popup">
+        <h3>Chi tiết mã giảm giá</h3>
+
+        <div id="viewBody"></div>
+
+        <div class="popup-footer">
+            <button class="btn btn-secondary" onclick="closeView()">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<script src="./assets/js/discounts.js"></script>
+
+</body>
+</html>

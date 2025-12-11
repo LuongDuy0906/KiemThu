@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "programName": "Sale Tết 2025",
+    "type": "percent",
+    "code": "TET2025",
+    "startDate": "2025-01-10",
+    "endDate": "2025-02-10",
+    "amount": 20,
+    "poster": "assets/images/discounts/tet-sale.jpg",
+    "quantity": 100
+  },
+  {
+    "id": 2,
+    "programName": "Flash Sale Cuối Tuần",
+    "type": "fixed",
+    "code": "FLASH100K",
+    "startDate": "2025-03-01",
+    "endDate": "2025-03-02",
+    "amount": 100000,
+    "poster": "assets/images/discounts/flash.jpg",
+    "quantity": 50
+  },
+  {
+    "id": 3,
+    "programName": "Giảm 10% Sinh Nhật Evara Shop",
+    "type": "percent",
+    "code": "BDAY10",
+    "startDate": "2025-04-01",
+    "endDate": "2025-04-30",
+    "amount": 10,
+    "poster": "assets/images/discounts/birthday.jpg",
+    "quantity": 200
+  },
+  {
+    "id": 4,
+    "programName": "Mừng Khai Trương",
+    "type": "fixed",
+    "code": "OPEN50K",
+    "startDate": "2025-05-15",
+    "endDate": "2025-05-25",
+    "amount": 50000,
+    "poster": "assets/images/discounts/openday.jpg",
+    "quantity": 300
+  }
+]

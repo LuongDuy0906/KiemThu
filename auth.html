@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập & Đăng ký</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/auth.css">
+</head>
+
+<body>
+    <div class="auth-container">
+
+        <h2>🔐 Hệ thống đăng nhập</h2>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" id="tab-login" onclick="switchTab('login')">Đăng nhập</div>
+            <div class="tab" id="tab-register" onclick="switchTab('register')">Đăng ký</div>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="loginForm">
+            <div class="input-box">
+                <input type="text" id="login_user" placeholder="Tên đăng nhập">
+            </div>
+            <div class="input-box">
+                <input type="password" id="login_pass" placeholder="Mật khẩu">
+            </div>
+            <button class="btn" onclick="login()">Đăng nhập</button>
+
+            <div class="link" onclick="switchTab('register')">Chưa có tài khoản? Đăng ký ngay</div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="registerForm" class="hidden">
+            <div class="input-box">
+                <input type="text" id="reg_user" placeholder="Tên đăng nhập">
+            </div>
+            <div class="input-box">
+                <input type="email" id="reg_email" placeholder="Email">
+            </div>
+            <div class="input-box">
+                <input type="password" id="reg_pass" placeholder="Mật khẩu">
+            </div>
+            <div class="input-box">
+                <input type="password" id="reg_pass2" placeholder="Nhập lại mật khẩu">
+            </div>
+
+            <button class="btn" onclick="register()">Đăng ký</button>
+
+            <div class="link" onclick="switchTab('login')">Đã có tài khoản? Đăng nhập</div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+
+</body>
+</html>

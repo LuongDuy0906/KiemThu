@@ -1,0 +1,228 @@
+/* -------------------------
+   GLOBAL STYLE
+-------------------------- */
+:root {
+    --primary: #2a8;
+    --primary-dark: #1f6b63;
+    --bg-light: #f7f9fb;
+    --border: #dce3e8;
+    --text-dark: #333;
+    --danger: #e74c3c;
+    --info: #3498db;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 2px solid #d1d5db;
+    border-radius: 30px;
+    padding: 6px 14px;
+    width: 260px;
+    transition: all 0.25s ease;
+}
+
+.search-wrapper:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 0 6px #0001;
+}
+
+.search-wrapper:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 8px #3b82f633;
+    width: 320px; /* mở rộng khi focus */
+}
+
+.search-icon {
+    font-size: 18px;
+    color: #475569;
+    margin-right: 8px;
+    user-select: none;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 15px;
+    background: none;
+}
+
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg-light);
+    padding: 30px;
+    color: var(--text-dark);
+}
+
+/* -------------------------
+   TITLE & HEADER
+-------------------------- */
+h2 {
+    margin-bottom: 15px;
+    color: var(--primary-dark);
+}
+
+/* -------------------------
+   BUTTONS
+-------------------------- */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-info {
+    background: var(--info);
+    color: white;
+}
+.btn-info:hover {
+    background: #2c81ba;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.btn-secondary {
+    background: #bbb;
+    color: white;
+}
+.btn-secondary:hover {
+    background: #999;
+}
+
+/* -------------------------
+   TABLE STYLE
+-------------------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #fff;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+    padding: 12px;
+    font-weight: 500;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+tr:hover {
+    background: #eef7f5;
+}
+
+.actions button {
+    margin-right: 6px;
+}
+
+/* -------------------------
+   POPUP / MODAL
+-------------------------- */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-content {
+    box-sizing: border-box;
+    background: white;
+    width: min(600px, 90vw);
+    max-height: 90vh;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #0003;
+    animation: fadeIn 0.25s ease;
+}
+
+
+@keyframes fadeIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.popup input,
+.popup textarea,
+.popup select {
+    width: 100%;
+    padding: 10px;
+    margin: 7px 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* -------------------------
+   PAGINATION
+-------------------------- */
+.pagination button {
+    padding: 7px 12px;
+    margin: 5px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+}
+.pagination button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* CSS MỚI: Định dạng khu vực các nút Lưu và Đóng */
+.popup-actions {
+    display: flex;             /* Kích hoạt Flexbox */
+    justify-content: flex-end; /* Đẩy các nút sang phải */
+    gap: 10px;                 /* Tạo khoảng cách 10px giữa các nút */
+    margin-top: 20px;          /* Tạo khoảng cách với phần tử trên */
+}
+
+/* Định dạng các nút để chúng có cùng kích thước và dễ quản lý */
+.popup-actions button {
+    /* Đảm bảo các nút không chiếm hết 100% chiều rộng */
+    width: auto; 
+    min-width: 80px; /* Đảm bảo nút có kích thước tối thiểu */
+    /* Bạn có thể thêm padding/styling chung của các nút ở đây nếu chưa có */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+/* Giả định bạn đã có định dạng cho .btn-primary và .btn-secondary */

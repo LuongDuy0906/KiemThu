@@ -1,0 +1,11 @@
+ .poster-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.big-popup {
+    width: 850px !important;
+}
+.row { display: flex; gap: 16px; margin-bottom: 12px; }
+.col { flex: 1; }

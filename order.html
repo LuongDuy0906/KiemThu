@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Quản Lý Hóa Đơn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS dùng chung -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/order.css">
+</head>
+
+<body>
+
+<h2>🧾 Quản lý Hóa Đơn (Offline)</h2>
+
+<div class="top-bar" style="display:flex;justify-content:space-between;">
+    <button class="btn btn-primary" onclick="openAddOrder()">+ Tạo Hóa Đơn</button>
+
+    <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input id="searchInput" class="search-input" placeholder="Tìm đơn hàng..." oninput="applySearch()">
+    </div>
+</div>
+
+<!-- =================== TABLE =================== -->
+<table id="ordersTable">
+    <thead>
+        <tr>
+            <th>Mã HĐ</th>
+            <th>Khách hàng</th>
+            <th>SĐT</th>
+            <th>Địa chỉ</th>
+            <th>Ngày lập</th>
+            <th>Thanh toán</th>
+            <th>Tổng tiền</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div class="pagination" id="pagination"></div>
+
+<!-- ========== POPUP ADD/EDIT ORDER ========== -->
+<div class="popup" id="popupOrder">
+    <div class="popup-content big-popup">
+
+        <h3 id="orderTitle">Tạo Hóa Đơn</h3>
+
+        <div class="row">
+            <div class="col">
+                <label>Khách hàng</label>
+                <select id="order_customer" class="input">
+                    <option value="">-- Chọn KH --</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label>Ngày lập</label>
+                <input id="order_date" type="date" class="input">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Tên khách</label>
+                <input id="order_name" class="input">
+            </div>
+
+            <div class="col small">
+                <label>SĐT</label>
+                <input id="order_phone" class="input">
+            </div>
+
+            <div class="col">
+                <label>Email</label>
+                <input id="order_email" class="input">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col full">
+                <label>Địa chỉ giao hàng</label>
+                <input id="order_address" class="input">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Thanh toán</label>
+                <select id="order_payment" class="input">
+                    <option value="COD">COD</option>
+                    <option value="Bank">Bank Transfer</option>
+                    <option value="Card">Credit Card</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label>Tổng tiền</label>
+                <input id="order_total" class="input" readonly>
+            </div>
+
+            <div class="col">
+                <label>Sản phẩm</label>
+                <button class="btn btn-info" onclick="openProductPopup()">Chọn SP</button>
+            </div>
+        </div>
+
+        <table class="table-mini" id="orderItemsTable">
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Giá</th>
+                    <th>SL</th>
+                    <th>Tổng</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="popup-footer">
+            <button class="btn btn-primary" onclick="saveOrder()">Lưu</button>
+            <button class="btn btn-secondary" onclick="closePopupOrder()">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== POPUP PRODUCT PICKER ========== -->
+<div class="popup" id="productPopup">
+    <div class="popup-content">
+
+        <h3>Chọn Sản Phẩm</h3>
+
+        <table class="table-mini">
+            <thead>
+                <tr>
+                    <th>Chọn</th>
+                    <th>Tên</th>
+                    <th>Giá</th>
+                    <th>SL</th>
+                </tr>
+            </thead>
+            <tbody id="productPickerBody"></tbody>
+        </table>
+
+        <div class="popup-footer">
+            <button class="btn btn-primary" onclick="addSelectedProducts()">Thêm</button>
+            <button class="btn btn-secondary" onclick="closeProductPopup()">Đóng</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ========== POPUP VIEW ORDER ========== -->
+<div class="popup" id="popupView">
+    <div class="popup-content big-popup">
+        <h3>Chi tiết hóa đơn</h3>
+        <div id="viewBody"></div>
+
+        <div class="popup-footer">
+            <button class="btn btn-secondary" onclick="closePopupView()">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== SCRIPT ===================== -->
+<script src="./assets/js/order.js"></script>
+
+</body>
+</html>

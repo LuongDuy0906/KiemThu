@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <div class="header">
+
+        <!-- Logo (bạn tự thay vào đây) -->
+        <div id="logoArea" style="font-weight:bold; font-size:18px;">
+            <!-- Ví dụ logo: -->
+            <img src="assets/img/ChatGPT-Image-Jun-14_-2025_-02_08_38-PM.svg" alt="Logo" style="height: 70px;">
+        </div>
+
+        <!-- User dropdown area -->
+        <div class="user-area" onclick="toggleDropdown()">
+            <span class="user-icon">👤</span>
+            <span id="headerUserLabel">Tài khoản</span>
+
+            <div id="dropdownMenu" class="dropdown"></div>
+        </div>
+
+    </div>
+
+    <!-- =========================
+         MAIN LAYOUT
+    ========================== -->
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <h2>⚙️ Admin Panel</h2>
+
+            <div class="menu-item active" onclick="loadPage('product.html', this)">
+                📦 Quản lý Sản phẩm
+            </div>
+
+            <div class="menu-item" onclick="loadPage('order.html', this)">
+                🧾 Quản lý Hóa đơn
+            </div>
+
+            <div class="menu-item" onclick="loadPage('user.html', this)">
+                👤 Quản lý Người dùng
+            </div>
+
+            <div class="menu-item" onclick="loadPage('discounts.html', this)">
+                🎟️ Quản lý Mã giảm giá
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="main">
+            <iframe id="contentFrame" src="product.html"></iframe>
+        </div>
+    </div>
+
+<script src="assets/js/admin.js"></script>
+
+</body>
+</html>
