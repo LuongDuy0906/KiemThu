@@ -86,11 +86,61 @@ function closeView() {
    SAVE COUPON
 =========================== */
 function saveCoupon() {
+
+    let error;
+
+    // Tên chương trình
+    error = validateDiscountName(c_name.value);
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    // Loại khuyến mãi
+    error = validateDiscountType(c_type.value);
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    // Mã khuyến mãi
+    error = validateDiscountCode(
+        c_code.value,
+        c_type.value,
+        coupons,
+        !!editing,
+        editing?.id
+    );
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    error = validateDiscountAmount(
+        c_amount.value,
+        c_type.options[c_type.selectedIndex].text
+    );
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    // Ngày bắt đầu
+    error = validateStartDate(c_start.value);
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    // Ngày kết thúc
+    error = validateEndDate(c_end.value, c_start.value);
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    error = validateQuantity(c_qty.value);
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    // 6️⃣ Mô tả
+    error = validateDescription(c_description.value);
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    // 8️⃣ Poster (FILE)
+    error = validateDiscountPoster(document.getElementById("c_poster"));
+    if (error) return alert(`${error.message} (Mã lỗi: ${error.code})`);
+
+    /* ===== SAVE ===== */
     const obj = {
-        id: editing ? editing.id : (coupons.length ? Math.max(...coupons.map(a => a.id)) + 1 : 1),
-        programName: c_name.value,
+        id: editing
+            ? editing.id
+            : (coupons.length ? Math.max(...coupons.map(a => a.id)) + 1 : 1),
+
+        programName: c_name.value.trim(),
         type: c_type.value,
-        code: c_code.value,
+        code: c_code.value.trim(),
         amount: Number(c_amount.value),
         startDate: c_start.value,
         endDate: c_end.value,
@@ -106,10 +156,10 @@ function saveCoupon() {
     }
 
     localStorage.setItem("coupons", JSON.stringify(coupons));
-
     renderTable();
     closePopup();
 }
+
 
 /* =========================
    VIEW DETAILS

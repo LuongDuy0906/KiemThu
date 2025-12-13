@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS CHUNG -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/discounts.css">
+    <link rel="stylesheet" href="src/assets/css/styles.css">
+    <link rel="stylesheet" href="src/assets/css/discounts.css">
 </head>
 
 <body>
@@ -55,10 +55,13 @@
                 <input id="c_name" class="input">
             </div>
             <div class="col">
-                <label>Loại</label>
+                <label>Loại khuyến mãi</label>
                 <select id="c_type" class="input">
-                    <option value="percent">Giảm %</option>
-                    <option value="fixed">Giảm tiền</option>
+                    <option value="">-- Chọn --</option>
+                    <option value="Khuyến mãi cửa hàng">Khuyến mãi cửa hàng</option>
+                    <option value="Khuyến mãi dịp lễ">Khuyến mãi dịp lễ</option>
+                    <option value="Khuyến mãi số lượng">Khuyến mãi số lượng</option>
+                    <option value="Khuyến mãi tổng tiền">Khuyến mãi tổng tiền</option>
                 </select>
             </div>
         </div>
@@ -70,7 +73,7 @@
             </div>
             <div class="col">
                 <label>Lượng giảm</label>
-                <input id="c_amount" type="number" class="input">
+                <input id="c_amount" class="input">
             </div>
         </div>
 
@@ -85,14 +88,23 @@
             </div>
             <div class="col">
                 <label>Số lượng</label>
-                <input id="c_qty" type="number" class="input">
+                <input id="c_qty" class="input">
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <label>Poster (URL)</label>
-                <input id="c_poster" class="input">
+                <label>Mô tả</label>
+                <textarea id="c_description" class="input"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>Poster giảm giá</label>
+                <input id="c_poster" type="file"
+                       accept=".jpg,.jpeg,.png,.svg"
+                       class="input">
             </div>
         </div>
 
@@ -102,6 +114,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- POPUP VIEW -->
 <div class="popup" id="popupView">
@@ -116,7 +129,8 @@
     </div>
 </div>
 
-<script src="./assets/js/discounts.js"></script>
+<script src="/src/assets/js/discounts/discounts.validate.js"></script>
+<script src="src/assets/js/discounts/discounts.js"></script>
 
 </body>
 </html>
