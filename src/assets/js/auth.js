@@ -10,9 +10,23 @@ function switchTab(type) {
 }
 
 /* =========================================
-   LOGIN MOCK (LocalStorage)
+   LOAD USERS (FIX CỐT LÕI)
 ========================================= */
-function login() {
+async function loadUsers() {
+    let stored = localStorage.getItem("users");
+    if (stored) return JSON.parse(stored);
+
+    const res = await fetch("data/users.json");
+    const users = await res.json();
+
+    localStorage.setItem("users", JSON.stringify(users));
+    return users;
+}
+
+/* =========================================
+   LOGIN
+========================================= */
+async function login() {
     let user = login_user.value.trim();
     let pass = login_pass.value.trim();
 
@@ -21,8 +35,9 @@ function login() {
         return;
     }
 
-    let users = JSON.parse(localStorage.getItem("users") || "[]");
-    let u = users.find(x => x.username === user && x.password === pass);
+    const users = await loadUsers();
+
+    const u = users.find(x => x.username === user && x.password === pass);
 
     if (!u) {
         alert("Sai thông tin đăng nhập!");
@@ -31,17 +46,15 @@ function login() {
 
     alert("Đăng nhập thành công!");
 
-    // 🔥 FIX: Lưu đúng dữ liệu login
     localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("loggedUser", user);
+    localStorage.setItem("loggedUser", u.username);
 
-    // 🔥 FIX: đảm bảo luôn rời khỏi iframe + tránh cache
+    // luôn thoát iframe + tránh cache
     window.top.location.href = "admin.html?ts=" + Date.now();
 }
 
-
 /* =========================================
-   REGISTER MOCK (LocalStorage)
+   REGISTER
 ========================================= */
 function register() {
     let user = reg_user.value.trim();
@@ -76,6 +89,5 @@ function register() {
     localStorage.setItem("users", JSON.stringify(users));
 
     alert("Đăng ký thành công!");
-
     switchTab('login');
 }

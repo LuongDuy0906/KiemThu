@@ -203,7 +203,7 @@ describe("DISCOUNT VALIDATION TESTS", () => {
         });
 
         test("6E22 - số lượng <= 0", () => {
-            const err = validateQuantity(-1);
+            const err = validateQuantity(0);
             expect(err.code).toBe("6E22");
         });
 
