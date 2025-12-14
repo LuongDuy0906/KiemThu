@@ -4,12 +4,10 @@ function validateDiscountName(name) {
     if (!value) {
         return { code: "6E1", message: "Tên chương trình không được để trống" };
     }
-
     const specialCharRegex = /[^a-zA-Z0-9À-ỹ\s]/u;
     if (specialCharRegex.test(value)) {
         return { code: "6E2", message: "Tên chương trình không được chứa kí tự đặc biệt" };
     }
-
     if (value.length > 40) {
         return { code: "6E3", message: "Tên chương trình không được vượt quá 40 ký tự" };
     }
@@ -45,7 +43,6 @@ function validateDiscountType(type) {
 
 function validateDiscountCode(code, type, coupons, isEdit = false, currentId = null) {
 
-    // 6E5 - để trống
     if (!code || !code.trim()) {
         return {
             code: "6E5",
@@ -55,7 +52,6 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
 
     code = code.trim();
 
-    // 6E8 - ký tự đặc biệt & dấu cách
     if (!/^[A-Z0-9]+$/.test(code)) {
         return {
             code: "6E8",
@@ -63,7 +59,6 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    // 6E6 - độ dài
     if (code.length !== 10) {
         return {
             code: "6E6",
@@ -71,17 +66,15 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    // Map loại khuyến mãi -> prefix
     const typePrefix = {
-        "Khuyến mãi cửa hàng": "CH",   // Khuyến mãi cửa hàng
-        "Khuyến mãi dịp lễ": "DL", // Khuyến mãi dịp lễ
-        "Khuyến mãi số lượng": "SL",// Khuyến mãi số lượng
-        "Khuyến mãi tổng tiền": "TG"    // Khuyến mãi tổng tiền
+        "Khuyến mãi cửa hàng": "CH",   
+        "Khuyến mãi dịp lễ": "DL", 
+        "Khuyến mãi số lượng": "SL",
+        "Khuyến mãi tổng tiền": "TG" 
     };
 
     const prefix = typePrefix[type];
 
-    // 6E9 - sai quy cách
     if (!prefix || !code.startsWith(prefix)) {
         return {
             code: "6E9",
@@ -89,7 +82,6 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    // CH + ddMMyy + xx
     const regex = new RegExp(`^${prefix}\\d{6}\\d{2}$`);
     if (!regex.test(code)) {
         return {
@@ -98,7 +90,6 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    // 6E7 - trùng mã
     const isDuplicate = coupons.some(c =>
         c.code === code && (!isEdit || c.id !== currentId)
     );
@@ -110,7 +101,7 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    return null; // hợp lệ
+    return null;
 }
 
 function validateStartDate(value) {
@@ -126,7 +117,6 @@ function validateStartDate(value) {
 
 function validateEndDate(endDate, startDate) {
 
-    // 6E11 - trống
     if (!endDate || endDate.trim() === "") {
         return {
             code: "6E11",
@@ -134,12 +124,10 @@ function validateEndDate(endDate, startDate) {
         };
     }
 
-    // nếu chưa có ngày bắt đầu thì không so sánh
     if (!startDate || startDate.trim() === "") {
         return null;
     }
 
-    // parse dd/MM/yyyy → Date
     const parseDate = (d) => {
         const [day, month, year] = d.split("/");
         return new Date(year, month - 1, day);
@@ -148,7 +136,6 @@ function validateEndDate(endDate, startDate) {
     const start = parseDate(startDate);
     const end = parseDate(endDate);
 
-    // 6E12 - ngày kết thúc <= ngày bắt đầu
     if (end <= start) {
         return {
             code: "6E12",
@@ -161,7 +148,7 @@ function validateEndDate(endDate, startDate) {
 
 function validateDescription(description) {
 
-    if (!description) return null; // không bắt buộc
+    if (!description) return null;
 
     if (description.length > 200) {
         return {
@@ -180,7 +167,6 @@ function validateDiscountAmount(amount, discountType) {
         "Khuyến mãi dịp lễ"
     ];
 
-    // ===== BẮT BUỘC NHẬP =====
     if (requiredTypes.includes(discountType)) {
         if (amount === "" || amount === null || amount === undefined) {
             return {
@@ -189,7 +175,6 @@ function validateDiscountAmount(amount, discountType) {
             };
         }
     } else {
-        // Không bắt buộc nhập → nếu trống thì bỏ qua
         if (amount === "" || amount === null || amount === undefined) {
             return null;
         }
@@ -197,7 +182,6 @@ function validateDiscountAmount(amount, discountType) {
 
     const amountStr = String(amount);
 
-    // ===== KHÔNG CHỨA CHỮ / KÝ TỰ ĐẶC BIỆT / DẤU CÁCH =====
     if (!/^\d+(\.\d+)?$/.test(amountStr)) {
         return {
             code: "6E16",
@@ -207,7 +191,6 @@ function validateDiscountAmount(amount, discountType) {
 
     const value = Number(amount);
 
-    // ===== GIÁ TRỊ HỢP LỆ =====
     if (value <= 0 || value > 100) {
         return {
             code: "6E15",
@@ -229,7 +212,6 @@ function validateDiscountPoster(fileInput) {
 
     const files = fileInput.files;
 
-    // ===== KHÔNG CHỌN FILE =====
     if (files.length === 0) {
         return {
             code: "6E17",
@@ -237,7 +219,6 @@ function validateDiscountPoster(fileInput) {
         };
     }
 
-    // ===== CHỌN > 1 FILE =====
     if (files.length > 1) {
         return {
             code: "6E20",
@@ -246,7 +227,7 @@ function validateDiscountPoster(fileInput) {
     }
 
     const file = files[0];
-    const maxSize = 25 * 1024 * 1024; // 25MB
+    const maxSize = 25 * 1024 * 1024;
     const allowedTypes = [
         "image/jpeg",
         "image/jpg",
@@ -254,7 +235,6 @@ function validateDiscountPoster(fileInput) {
         "image/svg+xml"
     ];
 
-    // ===== ĐỊNH DẠNG =====
     if (!allowedTypes.includes(file.type)) {
         return {
             code: "6E18",
@@ -262,7 +242,6 @@ function validateDiscountPoster(fileInput) {
         };
     }
 
-    // ===== KÍCH THƯỚC =====
     if (file.size > maxSize) {
         return {
             code: "6E19",
@@ -275,7 +254,6 @@ function validateDiscountPoster(fileInput) {
 
 function validateQuantity(value) {
 
-    // 6E21 – Không được để trống
     if (value === null || value === undefined || value.toString().trim() === "") {
         return {
             code: "6E21",
@@ -283,8 +261,6 @@ function validateQuantity(value) {
         };
     }
 
-    // 6E23 – Chứa chữ, ký tự đặc biệt, dấu cách
-    // Chỉ cho phép số nguyên dương
     if (!/^\d+$/.test(value)) {
         return {
             code: "6E23",
@@ -294,7 +270,6 @@ function validateQuantity(value) {
 
     const qty = Number(value);
 
-    // 6E22 – Phải lớn hơn 0
     if (qty <= 0) {
         return {
             code: "6E22",
@@ -302,7 +277,7 @@ function validateQuantity(value) {
         };
     }
 
-    return null; // ✅ Hợp lệ
+    return null;
 }
 
 module.exports = {
