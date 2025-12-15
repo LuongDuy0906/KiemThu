@@ -51,6 +51,14 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
     }
 
     code = code.trim();
+    const typePrefix = {
+        "Khuyến mãi cửa hàng": "CH",   
+        "Khuyến mãi dịp lễ": "DL", 
+        "Khuyến mãi số lượng": "SL",
+        "Khuyến mãi tổng tiền": "TG" 
+    };
+    const prefix = typePrefix[type];
+    const regex = new RegExp(`^${prefix}\\d{6}\\d{2}$`);
 
     if (!/^[A-Z0-9]+$/.test(code)) {
         return {
@@ -66,15 +74,6 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    const typePrefix = {
-        "Khuyến mãi cửa hàng": "CH",   
-        "Khuyến mãi dịp lễ": "DL", 
-        "Khuyến mãi số lượng": "SL",
-        "Khuyến mãi tổng tiền": "TG" 
-    };
-
-    const prefix = typePrefix[type];
-
     if (!prefix || !code.startsWith(prefix)) {
         return {
             code: "6E9",
@@ -82,7 +81,6 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    const regex = new RegExp(`^${prefix}\\d{6}\\d{2}$`);
     if (!regex.test(code)) {
         return {
             code: "6E9",
@@ -90,11 +88,7 @@ function validateDiscountCode(code, type, coupons, isEdit = false, currentId = n
         };
     }
 
-    const isDuplicate = coupons.some(c =>
-        c.code === code && (!isEdit || c.id !== currentId)
-    );
-
-    if (isDuplicate) {
+    if (coupons.some(c =>c.code === code && (!isEdit || c.id !== currentId))) {
         return {
             code: "6E7",
             message: "Mã giảm giá đã tồn tại"
@@ -122,10 +116,6 @@ function validateEndDate(endDate, startDate) {
             code: "6E11",
             message: "Không được để trống ngày kết thúc"
         };
-    }
-
-    if (!startDate || startDate.trim() === "") {
-        return null;
     }
 
     const parseDate = (d) => {
@@ -174,14 +164,10 @@ function validateDiscountAmount(amount, discountType) {
                 message: "Không được để trống lượng giảm"
             };
         }
-    } else {
-        if (amount === "" || amount === null || amount === undefined) {
-            return null;
-        }
     }
 
     const amountStr = String(amount);
-
+    
     if (!/^\d+(\.\d+)?$/.test(amountStr)) {
         return {
             code: "6E16",
@@ -211,6 +197,14 @@ function validateDiscountPoster(fileInput) {
     }
 
     const files = fileInput.files;
+    const file = files[0];
+    const maxSize = 25 * 1024 * 1024;
+    const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/svg+xml"
+    ];
 
     if (files.length === 0) {
         return {
@@ -225,15 +219,6 @@ function validateDiscountPoster(fileInput) {
             message: "Chỉ được chọn 1 file"
         };
     }
-
-    const file = files[0];
-    const maxSize = 25 * 1024 * 1024;
-    const allowedTypes = [
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/svg+xml"
-    ];
 
     if (!allowedTypes.includes(file.type)) {
         return {
