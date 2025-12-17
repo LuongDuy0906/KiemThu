@@ -165,17 +165,19 @@ function validateDiscountAmount(amount, discountType) {
             };
         }
     }
+    else{
+        return null;
+    }
 
     const amountStr = String(amount);
+    const value = Number(amount);
     
     if (!/^\d+(\.\d+)?$/.test(amountStr)) {
         return {
             code: "6E16",
-            message: "Không được nhập ký tự chữ, ký tự đặc biệt hoặc dấu cách"
+            message: "Lượng giảm không được nhập ký tự chữ, ký tự đặc biệt hoặc dấu cách"
         };
     }
-
-    const value = Number(amount);
 
     if (value <= 0 || value > 100) {
         return {
